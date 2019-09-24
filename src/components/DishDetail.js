@@ -6,28 +6,35 @@ class DishDetail extends Component {
     super(props);
   }
 
-  render() {
+  renderDish() {
     const { selectedDish } = this.props;
-    return selectedDish != null ? (
-      <div className="row">
-        <div className="col-sm-12 col-md-5 m-1">
-          <Card>
-            <CardImg
-              width="100%"
-              src={selectedDish.image}
-              alt={selectedDish.name}
-            />
-            <CardBody>
-              <CardTitle>{selectedDish.name}</CardTitle>
-              <CardText>{selectedDish.description}</CardText>
-            </CardBody>
-          </Card>
+
+    if (selectedDish != null) {
+      return (
+        <div className="row">
+          <div className="col-sm-12 col-md-5 m-1">
+            <Card>
+              <CardImg
+                width="100%"
+                src={selectedDish.image}
+                alt={selectedDish.name}
+              />
+              <CardBody>
+                <CardTitle>{selectedDish.name}</CardTitle>
+                <CardText>{selectedDish.description}</CardText>
+              </CardBody>
+            </Card>
+          </div>
+          <div className="col-sm-12 col-md-5 m-1"></div>
         </div>
-        <div className="col-sm-12 col-md-5 m-1"></div>
-      </div>
-    ) : (
-      <div></div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
+  render() {
+    return this.renderDish();
   }
 }
 
