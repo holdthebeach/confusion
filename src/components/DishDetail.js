@@ -7,25 +7,71 @@ class DishDetail extends Component {
   }
 
   renderDish() {
-    const { selectedDish } = this.props;
-
+    const selectedDish = this.props.selectedDish;
     if (selectedDish != null) {
       return (
-        <div className="row">
-          <div className="col-sm-12 col-md-5 m-1">
-            <Card>
-              <CardImg
-                width="100%"
-                src={selectedDish.image}
-                alt={selectedDish.name}
-              />
-              <CardBody>
-                <CardTitle>{selectedDish.name}</CardTitle>
-                <CardText>{selectedDish.description}</CardText>
-              </CardBody>
-            </Card>
-          </div>
-          <div className="col-sm-12 col-md-5 m-1"></div>
+        <div className="col-sm-12 col-md-5 m-1">
+          <Card>
+            <CardImg
+              width="100%"
+              src={selectedDish.image}
+              alt={selectedDish.name}
+            />
+            <CardBody>
+              <CardTitle>{selectedDish.name}</CardTitle>
+              <CardText>{selectedDish.description}</CardText>
+            </CardBody>
+          </Card>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
+  renderDateFormat(unFormattedDate) {
+    const date = new Date(unFormattedDate);
+    const month = date.getMonth();
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    return `${months[month]} ${day}, ${year}`;
+  }
+
+  renderComments() {
+    const selectedDish = this.props.selectedDish;
+
+    if (selectedDish != null) {
+      const comments = selectedDish.comments.map((commentArray, index) => {
+        return (
+          <li key={index} className="comment">
+            <span className="comment-text">{commentArray.comment}</span>
+            <span className="comment-info">
+              {`-- ${commentArray.author}, ${this.renderDateFormat(
+                commentArray.date
+              )}`}
+            </span>
+          </li>
+        );
+      });
+      return (
+        <div className="col-sm-12 col-md-5 m-1">
+          <h4>Comments</h4>
+          <ul className="list-unstyled">{comments}</ul>
         </div>
       );
     } else {
@@ -34,7 +80,12 @@ class DishDetail extends Component {
   }
 
   render() {
-    return this.renderDish();
+    return (
+      <div className="row">
+        {this.renderDish()}
+        {this.renderComments()}
+      </div>
+    );
   }
 }
 
