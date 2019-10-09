@@ -59,12 +59,12 @@ class DishDetail extends Component {
       const comments = selectedDish.comments.map((commentArray, index) => {
         return (
           <li key={index} className="comment">
-            <span className="comment-text">{commentArray.comment}</span>
-            <span className="comment-info">
+            <p className="comment-text">{commentArray.comment}</p>
+            <p className="comment-info">
               {`-- ${commentArray.author}, ${this.renderDateFormat(
                 commentArray.date
               )}`}
-            </span>
+            </p>
           </li>
         );
       });
