@@ -1,0 +1,12 @@
+.comment-text,
+.comment-info {
+  display: block;
+}
+
+.comment-text {
+  margin-bottom: 1 rem;
+}
+
+.comment-info {
+  margin-bottom: 1.5rem;
+}
