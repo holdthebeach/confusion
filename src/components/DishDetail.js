@@ -41,15 +41,12 @@ class DishDetail extends Component {
     const selectedDish = this.props.dish;
 
     if (selectedDish != null) {
-      const comments = selectedDish.comments.map((commentArray, index) => {
-        console.log(commentArray);
+      const comments = selectedDish.comments.map((comment, index) => {
         return (
           <li key={index} className="comment">
-            <p className="comment-text">{commentArray.comment}</p>
+            <p className="comment-text">{comment.comment}</p>
             <p className="comment-info">
-              {`-- ${commentArray.author}, ${this.renderDateFormat(
-                commentArray.date
-              )}`}
+              {`-- ${comment.author}, ${this.renderDateFormat(comment.date)}`}
             </p>
           </li>
         );
